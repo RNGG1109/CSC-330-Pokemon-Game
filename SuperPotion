@@ -1,0 +1,13 @@
+//Super Potion
+public class SuperPotion implements Item{
+	/*
+	 * Function to increase the health of the pokemon passed in by 30
+	 * @param a pokemon object
+	 */
+	public void use(Pokemon p){
+		p.health += 30;	
+		System.out.println("Super potion used on " + p.name);
+		System.out.println(p.name + " gained 30 health. Current health: " + p.health);
+		
+	}
+}
