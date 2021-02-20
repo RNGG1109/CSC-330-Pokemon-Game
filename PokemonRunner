@@ -1,0 +1,86 @@
+//Runner
+import java.util.Random;
+import java.util.Scanner;
+public class PokemonRunner {
+	public static void main(String[] args) {
+		
+		Scanner input = new Scanner(System.in);
+		Random rand = new Random();
+		HumanPlayer me = new HumanPlayer();
+		ComputerPlayer cpu = new ComputerPlayer();
+		Pokemon myCurrent;
+		Pokemon cpuCurrent;
+		Pokemon holder;
+		int counter = 1;
+		
+		myCurrent = me.choosePokemon();
+		System.out.println("You sent out " + myCurrent.name);
+		myCurrent.speak();
+		cpuCurrent = cpu.choosePokemon();
+		System.out.println("CPU sent out " + cpuCurrent.name);
+		cpuCurrent.speak();
+		
+		/*
+		 * loop runs as long as the trainers has pokemon. Once one players 
+		 * pokemon count hits zero the loop ends and the winner is chosen 
+		 */
+		while(me.getNumPokemon() > 0 && cpu.getNumPokemon() > 0) {	
+			
+			/*
+			 * start of battle you have a choice to attack, use item, or run
+			 */
+			System.out.println("\nTurn " + counter);
+			System.out.println("\nWhat would you like to do?");
+			System.out.println("1) Attack 2) Use item 3) Run");
+			String choice = input.nextLine();
+			if(choice.equals("1")) {
+				myCurrent.attack(cpuCurrent);
+			}
+			else if(choice.equals("2")){
+				me.chooseItem().use(myCurrent);
+			}else {
+				me.run();
+			}
+			/*
+			 * the computers turn to choose 
+			 */
+			if((rand.nextInt(2) + 1) == 1) {
+				cpuCurrent.cpuAttack(myCurrent);
+			}else if((rand.nextInt(2) + 1) == 2) {
+				cpu.chooseItem().use(cpuCurrent);
+			}else {
+				cpu.run();
+			}		
+			/*
+			 * this checks if the pokemon has 0 health and if so sends out
+			 * the other pokemon
+			 */
+			if(myCurrent.health <= 0 && me.numberOfPokemon > 0) {
+				System.out.println(myCurrent.getName() + " has fainted. Sending out other pokemon.");
+				myCurrent.isFaint = true;
+				me.setNumPokemon(me.getNumPokemon() - 1) ;
+				holder = me.chooseOtherPokemon(myCurrent);
+				myCurrent = holder;
+			}
+			if(cpuCurrent.health <= 0 && cpu.numberOfPokemon > 0) {
+				System.out.println(cpuCurrent.getName() + " has fainted. Sending out other pokemon.");
+				cpuCurrent.isFaint = true;
+				cpu.setNumPokemon(cpu.getNumPokemon() - 1) ;
+				holder = cpu.chooseOtherPokemon(cpuCurrent);
+				cpuCurrent = holder;
+			}
+			System.out.println("-----------------------------------------");
+			counter++;
+		}
+		/*
+		 * finally when the someone has 0 pokemon left the winner is decided
+		 */
+		System.out.println("\nThere are no more pokemon to send out");
+		System.out.println("Battle over");
+		if(me.getNumPokemon() == 0) {
+			System.out.println("CPU wins");
+		}else {
+			System.out.println("You win");
+		}
+	}
+}
