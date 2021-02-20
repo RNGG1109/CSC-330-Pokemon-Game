@@ -1,0 +1,14 @@
+//Potion
+public class Potion implements Item{
+	 /*
+	 * Function to increase the health of the pokemon passed in by 20
+	 * @param a pokemon object
+	 */
+	
+	public void use(Pokemon p){
+		p.health += 20;	
+		System.out.println("Potion used on " + p.name);
+		System.out.println(p.name + " gained 20 health. Current health: " + p.health);
+	}
+
+}
