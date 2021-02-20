@@ -1,0 +1,65 @@
+//ComputerPlayer
+import java.util.*;
+public class ComputerPlayer extends Player{
+	
+	Random rand = new Random();
+	
+	/*
+	 * Function to choose return a pokemon the computer chooses
+	 * @return a new pokemon object
+	 */
+	public Pokemon choosePokemon() {
+		if((rand.nextInt(2) + 1) == 1) {
+			return new Bulbasaur(50, 10, "Bulbasaur", "Grass", false);
+		}else{
+			return new Pikachu(70, 5, "Pikachu", "Electric", false);
+		}	
+	}	
+	
+	/*
+	 * Function to choose return a the other pokemon when 
+	 * the first one faints
+	 * 
+	 * @return a new pokemon object
+	 */
+	public Pokemon chooseOtherPokemon(Pokemon p) {
+		if(p.getName().equals("Pikachu")) {
+			return new Bulbasaur(50, 10, "Bulbasaur", "Grass", false);
+		}else{
+			return new Pikachu(70, 5, "Pikachu", "Electric", false);
+		}	
+	}
+	
+	/*
+	 * Function to choose return a potion/super potion the computer chooses
+	 * @return a new potion/super potion object
+	 */
+	public Item chooseItem() {
+		if((rand.nextInt(2) + 1) == 1) {
+			return new Potion();
+		}else{
+			return new SuperPotion();
+		}
+	}
+	
+	/*
+	 * set method for number of pokemon computer has 
+	 * @param the amount of pokemon the use has
+	 */
+	public void setNumPokemon(int n) {
+		numberOfPokemon = n;
+	}
+	/*
+	 * get method for the number of pokemon computer has
+	 * @return number of pokemon user has 
+	 */
+	public int getNumPokemon() {
+		return numberOfPokemon;
+	}
+	
+	public void run() {
+		System.out.println("You can't run from this battle.");
+	}
+	
+
+}
