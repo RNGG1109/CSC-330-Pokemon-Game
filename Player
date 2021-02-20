@@ -1,0 +1,12 @@
+//Player abstract class
+public abstract class Player {
+	protected int numberOfPokemon = 2;
+	
+	public abstract Pokemon choosePokemon();	
+	public abstract Pokemon chooseOtherPokemon(Pokemon p);
+	public abstract Item chooseItem();
+	public abstract void run();
+	
+	public abstract void setNumPokemon(int n);
+	public abstract int getNumPokemon();
+}
