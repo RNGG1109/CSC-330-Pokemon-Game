@@ -1,0 +1,67 @@
+//HumanPlayer
+import java.util.*;
+public class HumanPlayer extends Player{
+	
+	Scanner input = new Scanner(System.in);
+	/*
+	 * Function to choose return a pokemon the user chooses
+	 * @return a new pokemon object
+	 */
+	public Pokemon choosePokemon() {
+		System.out.println("Which pokemon would you like to send out?");
+		System.out.println("1) Charmander 2) Squirtle");
+		String choice = input.nextLine();
+		if(choice.equals("1")) {
+			return new Charmander(60, 5, "Charmander", "Fire", false);
+		}else{
+			return new Squirtle(70, 10, "Squirtle", "Water", false);
+		}	
+	}	
+	
+	/*
+	 * Function to choose return a the other pokemon when 
+	 * the first one faints
+	 * 
+	 * @return a new pokemon object
+	 */
+	public Pokemon chooseOtherPokemon(Pokemon p) {
+		if(p.getName().equals("Charmander")) {
+			return new Squirtle(70, 10, "Squirtle", "Water", false);
+		}else {
+			return new Charmander(60, 5, "Charmander", "Fire", false);
+		}
+	}
+	
+	/*
+	 * Function to choose return a potion/super potion the user chooses
+	 * @return a new potion/super potion object
+	 */
+	public Item chooseItem() {
+		System.out.println("Which item would you like to use?");
+		System.out.println("1) Potion 2) Super Potion");
+		String choice = input.nextLine();
+		if(choice.equals("1")) {
+			return new Potion();
+		}else{
+			return new SuperPotion();
+		}
+	}
+	/*
+	 * set method for number of pokemon user has 
+	 * @param the amount of pokemon the use has
+	 */
+	public void setNumPokemon(int n) {
+		numberOfPokemon = n;
+	}
+	/*
+	 * get method for the number of pokemon user has
+	 * @return number of pokemon user has 
+	 */
+	public int getNumPokemon() {
+		return numberOfPokemon;
+	}
+	
+	public void run() {
+		System.out.println("You can't run from this battle.");
+	}
+}
