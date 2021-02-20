@@ -1,0 +1,23 @@
+//Pokemon abstract class
+import java.util.*;
+public abstract class Pokemon {
+	protected double health;
+	protected int defence;
+	protected String name;
+	protected String type;
+	protected boolean isFaint;
+	
+	public Pokemon (double h, int d, String n, String t, boolean f) {
+		health = h;
+		defence = d;
+		name = n;
+		type = t;
+		isFaint = f;
+	}
+	
+	public abstract void attack (Pokemon other);
+	public abstract void cpuAttack (Pokemon other);
+	public abstract void speak();
+	public abstract String getName();
+	
+}
