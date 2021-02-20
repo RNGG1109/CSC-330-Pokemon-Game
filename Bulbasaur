@@ -1,0 +1,156 @@
+//Bulbasaur
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+public class Bulbasaur extends Pokemon {
+	Scanner input = new Scanner(System.in);	
+	Random rand = new Random();
+	ArrayList<String> moveSet = new ArrayList<String>();
+	/*
+	 * Default function with parameters to set the pokemons data and moves
+	 * @param health
+	 * @param defense
+	 * @param name
+	 * @param type
+	 * @param faint 
+	 * 
+	 */
+	public Bulbasaur(double h, int d, String n, String t, boolean f) {
+		super(h, d, n, t, f);
+		moveSet.add("Vine Whip"); //20 damage
+		moveSet.add("Tackle"); //15 damage
+		moveSet.add("Growl"); //defense - 5
+		moveSet.add("Cut"); // 10 damage
+	}
+	
+	/*
+	 * This function takes in a Pokemon object and depending on what the user
+	 * chooses it will deal that amount of damage and based on defense and type 
+	 * will either do more or less damage
+	 * 
+	 * @param Pokemon Takes in Pokemon object
+	 */
+	public void attack (Pokemon other) {
+		System.out.println(name + " is attacking " + other.name);
+		System.out.println(moveSet);
+		System.out.println("Which move to use? (type the move): ");
+		String attack = input.nextLine();
+		for(int i = 0; i < 4; i++) {
+			if(moveSet.get(i).equals(attack)) {
+				System.out.println(name + " used " + moveSet.get(i) + " on " + other.name);
+				if(moveSet.get(i) == "Vine Whip") {//vine whip
+					if(other.type.equals("Ground") || other.type.equals(("Rock")) || other.type.equals("Water")) {
+						other.health -=  ((2 * 20) - other.defence) ;
+						System.out.println("It's super effective x2 damage");
+					}else if (other.type.equals("Grass") || other.type.equals("Bug") || other.type.equals("Fire") || other.type.equals("Flying") || other.type.equals("Posion")){
+						other.health -= ((20/2) - other.defence);
+						System.out.println("It's not very effective 1/2 damage");
+					}else {
+						other.health -= 20 - other.defence;
+					}
+				}
+				if(moveSet.get(i) == "Tackle") {//tackle
+					if(other.type.equals("Ground") || other.type.equals(("Rock")) || other.type.equals("Water")) {
+						other.health -=  ((2 * 15) - other.defence) ;
+						System.out.println("It's super effective x2 damage");
+					}else if (other.type.equals("Grass") || other.type.equals("Bug") || other.type.equals("Fire") || other.type.equals("Flying") || other.type.equals("Posion")){
+						other.health -= ((15/2) - other.defence);
+						System.out.println("It's not very effective 1/2 damage");
+					}else {
+						other.health -= 15 - other.defence;
+					}	
+				}
+				if(moveSet.get(i) == "Growl") {//growl
+					System.out.println(other.name + "'s defence fell");
+					other.defence -= 5;
+				}
+				if(moveSet.get(i) == "Cut") {//cut
+					if(other.type.equals("Ground") || other.type.equals(("Rock")) || other.type.equals("Water")) {
+						other.health -=  ((2 * 10) - other.defence) ;
+						System.out.println("It's super effective x2 damage");
+					}else if (other.type.equals("Grass") || other.type.equals("Bug") || other.type.equals("Fire") || other.type.equals("Flying") || other.type.equals("Posion")){
+						other.health -= ((10/2) - other.defence);
+						System.out.println("It's not very effective 1/2 damage");
+					}else {
+						other.health -= 10 - other.defence;
+					}
+				}
+				System.out.println(other.name + "'s health: " + other.health);
+			}
+		}
+		
+		
+	}
+	
+	/*
+	 * This function takes in a Pokemon object and depending on what number the computer
+	 * chooses it will deal that amount of damage and based on defense and type 
+	 * will either do more or less damage
+	 * 
+	 * @param Pokemon Takes in Pokemon object
+	 */
+	public void cpuAttack (Pokemon other) {
+		int attack = rand.nextInt(4) + 1;
+		System.out.println(name + " is attacking " + other.name);
+	
+				System.out.println(name + " used " + moveSet.get(attack -1) + " on " + other.name);
+				if(attack == 1) {//vine whip
+					if(other.type.equals("Ground") || other.type.equals(("Rock")) || other.type.equals("Water")) {
+						other.health -=  ((2 * 20) - other.defence) ;
+						System.out.println("It's super effective x2 damage");
+					}else if (other.type.equals("Grass") || other.type.equals("Bug") || other.type.equals("Fire") || other.type.equals("Flying") || other.type.equals("Posion")){
+						other.health -= ((20/2) - other.defence);
+						System.out.println("It's not very effective 1/2 damage");
+					}else {
+						other.health -= 20 - other.defence;
+					}
+				}
+				if(attack == 2) {//tackle
+					if(other.type.equals("Ground") || other.type.equals(("Rock")) || other.type.equals("Water")) {
+						other.health -=  ((2 * 15) - other.defence) ;
+						System.out.println("It's super effective x2 damage");
+					}else if (other.type.equals("Grass") || other.type.equals("Bug") || other.type.equals("Fire") || other.type.equals("Flying") || other.type.equals("Posion")){
+						other.health -= ((15/2) - other.defence);
+						System.out.println("It's not very effective 1/2 damage");
+					}else {
+						other.health -= 15 - other.defence;
+					}	
+				}
+				if(attack == 3) {//growl
+					System.out.println(other.name + "'s defence fell");
+					other.defence -= 5;
+				}
+				if(attack == 4) {//cut
+					if(other.type.equals("Ground") || other.type.equals(("Rock")) || other.type.equals("Water")) {
+						other.health -=  ((2 * 10) - other.defence) ;
+						System.out.println("It's super effective x2 damage");
+					}else if (other.type.equals("Grass") || other.type.equals("Bug") || other.type.equals("Fire") || other.type.equals("Flying") || other.type.equals("Posion")){
+						other.health -= ((10/2) - other.defence);
+						System.out.println("It's not very effective 1/2 damage");
+					}else {
+						other.health -= 10 - other.defence;
+					}
+				}
+				System.out.println(other.name + "'s health: " + other.health);
+			}
+		
+	/*
+	 * A getter to return if the pokemon has fainted or not
+	 * @return if pokemon is fainted true/false
+	 */
+	public boolean getFaint() {
+		return isFaint;
+	}
+	/*
+	 * A name getter
+	 * @return the pokemons name
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	public void speak() {
+		System.out.println("bulbasaur!");
+	}
+	
+}
